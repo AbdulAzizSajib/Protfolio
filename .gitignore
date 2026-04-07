@@ -33,3 +33,4 @@ out/
 # local tooling caches
 .turbo/
 .cache/
+.vercel
