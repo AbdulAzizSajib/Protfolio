@@ -1,4 +1,3 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
 const API_URL_NEW = process.env.NEXT_NEW_PUBLIC_API_URL ?? "";
 
 export type Profile = {
@@ -69,6 +68,31 @@ export type Project = {
   technologies?: string[];
   description: string;
   gallery: string[];
+};
+
+type ProjectApiImage =
+  | string
+  | {
+      url?: string;
+      imageUrl?: string;
+    };
+
+type ProjectApiSkill =
+  | string
+  | {
+      name?: string;
+      title?: string;
+    };
+
+type ProjectApiItem = {
+  title: string;
+  description?: string;
+  coverImage?: string;
+  liveUrl?: string;
+  sortOrder?: number;
+  skills?: ProjectApiSkill[];
+  tags?: string[];
+  images?: ProjectApiImage[];
 };
 
 export async function getProfile(): Promise<Profile | null> {
@@ -172,12 +196,57 @@ export async function getExperiences(): Promise<WorkExperience[]> {
 
 export async function getProjects(): Promise<Project[]> {
   try {
-    const res = await fetch(`${API_URL}/api/project/list`, {
+    if (!API_URL_NEW) {
+      console.error("NEXT_NEW_PUBLIC_API_URL is not configured");
+      return [];
+    }
+
+    const res = await fetch(`${API_URL_NEW}/projects?limit=10`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) return [];
     const data = await res.json();
-    return data?.Project ?? [];
+
+    const projects: ProjectApiItem[] = data?.data ?? [];
+
+    return projects
+      .map((project) => {
+        const galleryImages = (project.images ?? [])
+          .map((image) => {
+            if (typeof image === "string") return image;
+            return image?.url || image?.imageUrl || "";
+          })
+          .filter(Boolean);
+
+        const thumbnail = project.coverImage ?? galleryImages[0] ?? "";
+
+        const technologiesFromSkills = (project.skills ?? [])
+          .map((skill) => {
+            if (typeof skill === "string") return skill;
+            return skill?.name || skill?.title || "";
+          })
+          .filter(Boolean);
+
+        return {
+          title: project.title,
+          thumbnail,
+          liveLink: project.liveUrl ?? "#",
+          technologies:
+            technologiesFromSkills.length > 0
+              ? technologiesFromSkills
+              : project.tags ?? [],
+          description: project.description ?? "",
+          gallery:
+            galleryImages.length > 0
+              ? galleryImages
+              : thumbnail
+                ? [thumbnail]
+                : [],
+          sortOrder: project.sortOrder ?? Number.MAX_SAFE_INTEGER,
+        };
+      })
+      .sort((a, b) => a.sortOrder - b.sortOrder)
+      .map(({ sortOrder: _sortOrder, ...project }) => project);
   } catch {
     console.error("Failed to fetch projects");
     return [];

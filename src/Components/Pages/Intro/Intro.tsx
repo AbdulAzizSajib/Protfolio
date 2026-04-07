@@ -97,6 +97,7 @@ const Intro = ({ profile, skills }: IntroProps) => {
                   alt={skill.name}
                   width={48}
                   height={48}
+                  unoptimized={skill.iconUrl.includes("skillicons.dev")}
                   className="w-10 h-10 sm:w-12 sm:h-12 md:w-12 md:h-12 transition-all duration-300 group-hover:-translate-y-2 transform group-hover:scale-110"
                 />
                 <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">

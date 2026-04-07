@@ -31,14 +31,20 @@ const Projects = ({ projects }: ProjectsProps) => {
         {projects.map((project, index) => (
           <div key={index} className="mb-8 sm:mb-12">
             <div className="rounded overflow-hidden w-full max-w-[650px] h-[200px] sm:h-[250px] lg:h-[300px] mx-auto relative">
-              <Image
-                onClick={() => setActiveProject(project)}
-                className="cursor-pointer object-cover"
-                src={project.thumbnail}
-                alt={project.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 650px"
-              />
+              {project.thumbnail ? (
+                <Image
+                  onClick={() => project.gallery.length > 0 && setActiveProject(project)}
+                  className={`object-cover ${project.gallery.length > 0 ? "cursor-pointer" : ""}`}
+                  src={project.thumbnail}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 650px"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-zinc-200 dark:bg-zinc-800 text-sm text-zinc-600 dark:text-zinc-300">
+                  No preview available
+                </div>
+              )}
             </div>
 
             <div className="w-full max-w-[650px] mx-auto mt-4 sm:mt-6">
@@ -46,21 +52,25 @@ const Projects = ({ projects }: ProjectsProps) => {
                 <h2 className="font-semibold text-lg sm:text-base text-center sm:text-left">{project.title}</h2>
                 <div className="hidden lg:block w-32 xl:w-72 h-[1px] border dark:bg-white flex-1 mx-4" />
                 <div className="flex items-center gap-2">
-                  <button
-                    className="hover:text-[#6366F1] hover:scale-110 transition-transform duration-300"
-                    onClick={() => setActiveProject(project)}
-                    type="button"
-                  >
-                    <Icon className="text-2xl sm:text-xl" icon="ri:screenshot-fill" />
-                  </button>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={project.liveLink}
-                    className="hover:text-[#6366F1] hover:scale-110 transition-transform duration-300"
-                  >
-                    <Icon className="text-2xl sm:text-xl" icon="line-md:external-link" />
-                  </a>
+                  {project.gallery.length > 0 && (
+                    <button
+                      className="hover:text-[#6366F1] hover:scale-110 transition-transform duration-300"
+                      onClick={() => setActiveProject(project)}
+                      type="button"
+                    >
+                      <Icon className="text-2xl sm:text-xl" icon="ri:screenshot-fill" />
+                    </button>
+                  )}
+                  {project.liveLink && project.liveLink !== "#" && (
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={project.liveLink}
+                      className="hover:text-[#6366F1] hover:scale-110 transition-transform duration-300"
+                    >
+                      <Icon className="text-2xl sm:text-xl" icon="line-md:external-link" />
+                    </a>
+                  )}
                 </div>
               </div>
               <h2 className="my-2 sm:my-3 capitalize text-indigo-600 text-sm sm:text-base text-center sm:text-left space-x-2">
