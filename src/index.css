@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #6366f1;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+/*  */
+.morph-image {
+  -webkit-animation: morph 8s ease-in-out infinite;
+  animation: morph 8s ease-in-out infinite;
+  animation-duration: 8s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  animation-name: morph;
+  animation-timeline: auto;
+  animation-range-start: normal;
+  animation-range-end: normal;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* border: 3px solid #2d2e32; */
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  height: 20rem;
+  width: 20rem;
+  position: relative;
+  transition: all 1s ease-in-out;
+}
+
+.light-border {
+  border: 3px solid #2d2e32;
+}
+.dark-border {
+  border: 3px solid #ffffff;
+}
+
+@keyframes morph {
+  0% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  50% {
+    border-radius: 40% 60% 70% 30% / 40% 70% 30% 60%;
+  }
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .morph-image {
+    width: 20rem;
+    height: 20rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .morph-image {
+    width: 16rem;
+    height: 16rem;
+    margin-top: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .morph-image {
+    width: 12rem;
+    height: 12rem;
+    margin-top: 4rem;
+  }
+}
+
+/* Cv Download */
+
+.button {
+  --main-focus: #2d8cf0;
+  --font-color: #323232;
+  --bg-color-sub: #dedede;
+  --bg-color: #eee;
+  --main-color: #323232;
+  position: relative;
+  width: 180px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.button,
+.button__icon,
+.button__text {
+  transition: all 0.3s;
+}
+
+.button .button__text {
+  transform: translateX(22px);
+  color: var(--font-color);
+  font-weight: 600;
+}
+
+.button .button__icon {
+  position: absolute;
+  right: 0; /* Position at the end */
+  transform: translateX(0);
+  height: 100%;
+  width: 39px;
+  background-color: var(--bg-color-sub);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button .svg {
+  width: 20px;
+  fill: var(--main-color);
+}
+
+.button:hover {
+  background: var(--bg-color);
+}
+
+.button:hover .button__text {
+  color: transparent;
+}
+
+.button:hover .button__icon {
+  width: 100%;
+  transform: translateX(0);
+}
+
+.button:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px var(--main-color);
+}
+
+html {
+  /* Light mode: black cursor */
+  --cursor-color: #000;
+}
+
+html.dark-mode {
+  /* Dark mode: white cursor */
+  --cursor-color: #fff;
+}

@@ -1,0 +1,185 @@
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
+const API_URL_NEW = process.env.NEXT_NEW_PUBLIC_API_URL ?? "";
+
+export type Profile = {
+  id: string;
+  userId: string;
+  tagline?: string;
+  bio?: string;
+  avatarUrl?: string;
+  resumeUrl?: string;
+  location?: string;
+  website?: string;
+  available?: boolean;
+  github?: string;
+  linkedin?: string;
+  twitter?: string;
+  youtube?: string;
+  dribbble?: string;
+  behance?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  user?: {
+    id: string;
+    name: string;
+    image?: string | null;
+  };
+};
+
+export type Skill = {
+  id: string;
+  name: string;
+  iconUrl: string;
+  proficiency: number;
+  category: string;
+  sortOrder: number;
+  featured: boolean;
+};
+
+export type WorkExperience = {
+  id: string;
+  sortOrder: number;
+  period: string;
+  companyLogo?: string;
+  position: string;
+  company: string;
+  type: string;
+  technologies?: string[];
+  description: string;
+};
+
+type ExperienceApiItem = {
+  id: string;
+  sortOrder: number;
+  company: string;
+  role: string;
+  description: string;
+  logoUrl?: string | null;
+  employmentType?: string | null;
+  locationType?: string | null;
+  startDate: string;
+  endDate?: string | null;
+  current: boolean;
+};
+
+export type Project = {
+  title: string;
+  thumbnail: string;
+  liveLink: string;
+  technologies?: string[];
+  description: string;
+  gallery: string[];
+};
+
+export async function getProfile(): Promise<Profile | null> {
+  try {
+    const res = await fetch(`${API_URL_NEW}/profile`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data?.data ?? null;
+  } catch {
+    console.error("Failed to fetch profile");
+    return null;
+  }
+}
+
+export async function getSkills(): Promise<Skill[]> {
+  try {
+    const res = await fetch(`${API_URL_NEW}/skills?limit=100`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return (data?.data ?? []).sort(
+      (a: Skill, b: Skill) => a.sortOrder - b.sortOrder,
+    );
+  } catch {
+    console.error("Failed to fetch skills");
+    return [];
+  }
+}
+
+export async function getExperiences(): Promise<WorkExperience[]> {
+  try {
+    if (!API_URL_NEW) {
+      console.error("NEXT_NEW_PUBLIC_API_URL is not configured");
+      return [];
+    }
+
+    const experiencesUrl = `${API_URL_NEW}/experiences?limit=10`;
+
+    const res = await fetch(experiencesUrl, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+
+    const formatPeriod = (
+      startDate: string,
+      endDate?: string | null,
+      current?: boolean,
+    ) => {
+      const start = new Date(startDate).toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+      });
+
+      if (current) {
+        return `${start} - Present`;
+      }
+
+      if (!endDate) {
+        return start;
+      }
+
+      const end = new Date(endDate).toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+      });
+
+      return `${start} - ${end}`;
+    };
+
+    const experiences: ExperienceApiItem[] = data?.data ?? [];
+
+    return experiences
+      .map((experience) => ({
+        id: experience.id,
+        sortOrder: experience.sortOrder,
+        period: formatPeriod(
+          experience.startDate,
+          experience.endDate,
+          experience.current,
+        ),
+        companyLogo: experience.logoUrl ?? undefined,
+        position: experience.role,
+        company: experience.company,
+        type:
+          experience.employmentType ??
+          experience.locationType?.replace(/_/g, " ") ??
+          "Experience",
+        technologies: [],
+        description: experience.description,
+      }))
+      .sort((a, b) => a.sortOrder - b.sortOrder);
+  } catch {
+    console.error("Failed to fetch experiences");
+    return [];
+  }
+}
+
+export async function getProjects(): Promise<Project[]> {
+  try {
+    const res = await fetch(`${API_URL}/api/project/list`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data?.Project ?? [];
+  } catch {
+    console.error("Failed to fetch projects");
+    return [];
+  }
+}
