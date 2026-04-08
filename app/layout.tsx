@@ -21,7 +21,7 @@ export default function RootLayout({
         <Providers>
           <ThemeRoot>
             <Navbar />
-            <main className="min-h-screen max-w-7xl mx-auto">{children}</main>
+            <main className="min-h-screen max-w-4xl mx-auto">{children}</main>
             <Footer />
           </ThemeRoot>
         </Providers>

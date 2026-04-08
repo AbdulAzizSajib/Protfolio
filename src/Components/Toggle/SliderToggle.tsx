@@ -1,41 +1,143 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiMoon, FiSun } from "react-icons/fi";
 import useTheme from "../Hooks/useTheme";
-
-const TOGGLE_CLASSES =
-  "text-sm font-medium flex items-center gap-2 px-3 md:pl-3 md:pr-3.5 py-3 md:py-1.5 transition-colors relative z-10";
 
 const SliderToggle = () => {
   const { theme, toggleTheme } = useTheme();
+  const isChecked = theme === "dark";
 
   return (
-    <div className="relative flex items-center rounded-full w-fit">
-      <button
-        className={`${TOGGLE_CLASSES} ${theme === "light" ? "text-white" : "text-slate-300"}`}
-        onClick={() => toggleTheme("light")}
-        type="button"
-      >
-        <FiMoon className="relative z-10 text-lg md:text-sm" />
-        <span className="relative z-10">Light</span>
-      </button>
-      <button
-        className={`${TOGGLE_CLASSES} ${theme === "dark" ? "text-white" : "text-slate-800"}`}
-        onClick={() => toggleTheme("dark")}
-        type="button"
-      >
-        <FiSun className="relative z-10 text-lg md:text-sm" />
-        <span className="relative z-10">Dark</span>
-      </button>
-      <div className={`absolute inset-0 z-0 flex ${theme === "dark" ? "justify-end" : "justify-start"}`}>
-        <motion.span
-          layout
-          transition={{ type: "spring", damping: 15, stiffness: 250 }}
-          className="w-1/2 h-full rounded-full bg-gradient-to-r from-violet-600 to-indigo-600"
+    <>
+      <style>{`
+        .switch {
+          font-size: 15px;
+          position: relative;
+          display: inline-block;
+          width: 5em;
+          height: 2.5em;
+          user-select: none;
+        }
+
+        .switch .cb {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+
+        .toggle {
+          position: absolute;
+          cursor: pointer;
+          width: 100%;
+          height: 100%;
+          background-color: #373737;
+          border-radius: 0.1em;
+          transition: 0.4s;
+          text-transform: uppercase;
+          font-weight: 700;
+          overflow: hidden;
+          box-shadow: -0.3em 0 0 0 #373737, -0.3em 0.3em 0 0 #373737,
+            0.3em 0 0 0 #373737, 0.3em 0.3em 0 0 #373737, 0 0.3em 0 0 #373737;
+        }
+
+        .toggle > .left {
+          position: absolute;
+          display: flex;
+          width: 50%;
+          height: 88%;
+          background-color: #f3f3f3;
+          color: #373737;
+          left: 0;
+          bottom: 0;
+          align-items: center;
+          justify-content: center;
+          transform-origin: right;
+          transform: rotateX(10deg);
+          transform-style: preserve-3d;
+          transition: all 150ms;
+        }
+
+        .left::before {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-color: rgb(206, 206, 206);
+          transform-origin: center left;
+          transform: rotateY(90deg);
+        }
+
+        .left::after {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-color: rgb(112, 112, 112);
+          transform-origin: center bottom;
+          transform: rotateX(90deg);
+        }
+
+        .toggle > .right {
+          position: absolute;
+          display: flex;
+          width: 50%;
+          height: 88%;
+          background-color: #f3f3f3;
+          color: rgb(206, 206, 206);
+          right: 1px;
+          bottom: 0;
+          align-items: center;
+          justify-content: center;
+          transform-origin: left;
+          transform: rotateX(10deg) rotateY(-45deg);
+          transform-style: preserve-3d;
+          transition: all 150ms;
+        }
+
+        .right::before {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-color: rgb(206, 206, 206);
+          transform-origin: center right;
+          transform: rotateY(-90deg);
+        }
+
+        .right::after {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-color: rgb(112, 112, 112);
+          transform-origin: center bottom;
+          transform: rotateX(90deg);
+        }
+
+        .switch input:checked + .toggle > .left {
+          transform: rotateX(10deg) rotateY(45deg);
+          color: rgb(206, 206, 206);
+        }
+
+        .switch input:checked + .toggle > .right {
+          transform: rotateX(10deg) rotateY(0deg);
+          color: #487bdb;
+        }
+      `}</style>
+
+      <label className="switch">
+        <input
+          className="cb"
+          type="checkbox"
+          checked={isChecked}
+          onChange={() => toggleTheme(isChecked ? "light" : "dark")}
         />
-      </div>
-    </div>
+        <span className="toggle">
+          <span className="left">on</span>
+          <span className="right">off</span>
+        </span>
+      </label>
+    </>
   );
 };
 

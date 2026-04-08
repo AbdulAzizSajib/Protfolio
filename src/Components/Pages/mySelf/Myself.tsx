@@ -28,9 +28,9 @@ const Myself = ({ experiences }: MyselfProps) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8"
+              className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8"
             >
-              <div className="lg:col-span-1">
+              <div className="lg:col-span-2">
                 <p className={`text-base sm:text-lg font-medium ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>
                   {experience.period}
                 </p>
@@ -61,13 +61,18 @@ const Myself = ({ experiences }: MyselfProps) => {
                     ))}
                   </p>
                 </div>
-                <p
-                  className={`text-sm sm:text-base lg:text-lg font-light ${
+                <ul
+                  className={`text-sm sm:text-base lg:text-base font-light ${
                     theme === "light" ? "text-gray-700" : "text-gray-300"
-                  } max-w-4xl`}
+                  } max-w-4xl list-disc list-inside space-y-2`}
                 >
-                  {experience.description}
-                </p>
+                  {(experience.description.match(/[^.!?]+[.!?]+/g) || [experience.description])?.map((sentence, index) => {
+                    const trimmedSentence = sentence.trim();
+                    return trimmedSentence ? (
+                      <li key={index}>{trimmedSentence}</li>
+                    ) : null;
+                  })}
+                </ul>
               </div>
             </motion.div>
           ))}

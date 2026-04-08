@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Modal } from "antd";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import useTheme from "../../Hooks/useTheme";
 import useFancybox from "../../Hooks/useFancybox";
 import type { Project } from "../../../lib/api";
@@ -15,6 +16,7 @@ type ProjectsProps = {
 const Projects = ({ projects }: ProjectsProps) => {
   const { theme } = useTheme();
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [expandedDescription, setExpandedDescription] = useState<number | null>(null);
   const [fancyboxRef] = useFancybox({
     infinite: true,
     Thumbs: { autoStart: true },
@@ -30,7 +32,7 @@ const Projects = ({ projects }: ProjectsProps) => {
       <div className="grid grid-cols-1 mt-8 lg:mt-12 lg:grid-cols-2 gap-x-6 lg:gap-x-16">
         {projects.map((project, index) => (
           <div key={index} className="mb-8 sm:mb-12">
-            <div className="rounded overflow-hidden w-full max-w-[650px] h-[200px] sm:h-[250px] lg:h-[300px] mx-auto relative">
+            <div className="rounded overflow-hidden w-full max-w-[650px] aspect-video mx-auto relative">
               {project.thumbnail ? (
                 <Image
                   onClick={() => project.gallery.length > 0 && setActiveProject(project)}
@@ -52,7 +54,7 @@ const Projects = ({ projects }: ProjectsProps) => {
                 <h2 className="font-semibold text-lg sm:text-base text-center sm:text-left">{project.title}</h2>
                 <div className="hidden lg:block w-32 xl:w-72 h-[1px] border dark:bg-white flex-1 mx-4" />
                 <div className="flex items-center gap-2">
-                  {project.gallery.length > 0 && (
+                  {/* {project.gallery.length > 0 && (
                     <button
                       className="hover:text-[#6366F1] hover:scale-110 transition-transform duration-300"
                       onClick={() => setActiveProject(project)}
@@ -60,7 +62,7 @@ const Projects = ({ projects }: ProjectsProps) => {
                     >
                       <Icon className="text-2xl sm:text-xl" icon="ri:screenshot-fill" />
                     </button>
-                  )}
+                  )} */}
                   {project.liveLink && project.liveLink !== "#" && (
                     <a
                       target="_blank"
@@ -80,7 +82,44 @@ const Projects = ({ projects }: ProjectsProps) => {
                   </span>
                 ))}
               </h2>
-              <p className="text-justify text-sm font-light">{project.description}</p>
+              <button
+                onClick={() => setExpandedDescription(expandedDescription === index ? null : index)}
+                className={`w-full flex items-center justify-between p-3 rounded transition-all ${
+                  expandedDescription === index
+                    ? theme === "light"
+                      ? "bg-zinc-200"
+                      : "bg-zinc-800"
+                    : theme === "light"
+                    ? "bg-zinc-100 hover:bg-zinc-200"
+                    : "bg-zinc-800 hover:bg-zinc-700"
+                }`}
+              >
+                <span className="font-medium text-sm">Project Description</span>
+                <Icon
+                  icon="mdi:chevron-down"
+                  className={`text-xl transition-transform duration-300 ${expandedDescription === index ? "rotate-180" : ""}`}
+                />
+              </button>
+              <AnimatePresence>
+                {expandedDescription === index && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <ul className="text-sm font-light list-disc list-inside space-y-1 mt-3 p-3">
+                      {(project.description.match(/[^.!?]+[.!?]+/g) || [project.description])?.map((sentence, sentenceIndex) => {
+                        const trimmedSentence = sentence.trim();
+                        return trimmedSentence ? (
+                          <li key={sentenceIndex}>{trimmedSentence}</li>
+                        ) : null;
+                      })}
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         ))}
