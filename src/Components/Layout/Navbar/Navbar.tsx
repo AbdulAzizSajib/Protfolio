@@ -4,7 +4,7 @@ import { Link } from "react-scroll";
 import { motion } from "framer-motion";
 import SliderToggle from "../../Toggle/SliderToggle";
 import useTheme from "../../Hooks/useTheme";
-import LoveButton from "../../loveButton/LoveButton";
+
 
 const Navbar = () => {
   const { theme } = useTheme();
@@ -78,7 +78,7 @@ const Navbar = () => {
           <SliderToggle />
         </motion.ul>
       </div>
-      <LoveButton />
+     
     </div>
   );
 };

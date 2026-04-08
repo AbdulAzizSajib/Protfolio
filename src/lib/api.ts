@@ -1,4 +1,4 @@
-const API_URL_NEW = process.env.NEXT_NEW_PUBLIC_API_URL ?? "";
+const API_URL_NEW = process.env.NEXT_PUBLIC_API_URL ?? "";
 
 export type Profile = {
   id: string;
@@ -128,7 +128,7 @@ export async function getSkills(): Promise<Skill[]> {
 export async function getExperiences(): Promise<WorkExperience[]> {
   try {
     if (!API_URL_NEW) {
-      console.error("NEXT_NEW_PUBLIC_API_URL is not configured");
+      console.error("NEXT_PUBLIC_API_URL is not configured");
       return [];
     }
 
@@ -197,7 +197,7 @@ export async function getExperiences(): Promise<WorkExperience[]> {
 export async function getProjects(): Promise<Project[]> {
   try {
     if (!API_URL_NEW) {
-      console.error("NEXT_NEW_PUBLIC_API_URL is not configured");
+      console.error("NEXT_PUBLIC_API_URL is not configured");
       return [];
     }
 
