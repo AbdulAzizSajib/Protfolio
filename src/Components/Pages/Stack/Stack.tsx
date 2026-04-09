@@ -45,10 +45,10 @@ const Stack = ({ skills }: StackProps) => {
   }, [skills]);
 
   return (
-    <section id="stack" className="">
+    <section id="stack" className="px-4 lg:p-0">
       <div className="">
-        <div className="flex flex-col sm:flex-row flex-wrap items-center justify-start gap-4 sm:gap-6 mb-10">
-          <h2 className="font-bold text-2xl sm:text-3xl md:text-3xl">Tech Stack</h2>
+        <div className="flex flex-col sm:flex-row flex-wrap items-center justify-start gap-4 sm:gap-6 mb-4">
+          <h2 className="font-bold text-2xl sm:text-3xl md:text-3xl mb-4">Tech Stack</h2>
         </div>
 
         <div className="flex flex-wrap items-center justify-start gap-3 sm:gap-4 md:gap-5">
@@ -68,9 +68,6 @@ const Stack = ({ skills }: StackProps) => {
                   unoptimized={skill.iconUrl.includes("skillicons.dev")}
                   className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 transition-all duration-300 group-hover:-translate-y-2 transform group-hover:scale-110 cursor-pointer"
                 />
-                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs sm:text-sm px-3 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10">
-                  {skill.name}
-                </span>
               </motion.div>
             ))
           ) : (

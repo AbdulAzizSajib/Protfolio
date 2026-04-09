@@ -24,12 +24,11 @@ const Projects = ({ projects }: ProjectsProps) => {
 
   return (
     <div id="projects" className={theme === "light" ? "text-black p-4 lg:p-0" : "bg-zinc-900 text-white p-4 lg:p-0"}>
-      <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center w-full mb-12">
-        <div className={`w-full h-[1px] ${theme === "light" ? "bg-zinc-400" : "bg-zinc-700"}`} />
-        <h2 className="text-2xl lg:text-2xl font-bold mb-4 sm:mb-0 uppercase text-end lg:w-[15%]">Projects</h2>
+      <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center w-full mb-4">
+        <h2 className="text-2xl lg:text-3xl font-bold mb-4 text-end lg:w-[15%]">Projects</h2>
       </div>
 
-      <div className="grid grid-cols-1 mt-8 lg:mt-12 lg:grid-cols-2 gap-x-6 lg:gap-x-16">
+      <div className="grid grid-cols-1 mt-0 lg:mt-0 lg:grid-cols-2 gap-x-6 lg:gap-x-16">
         {projects.map((project, index) => (
           <div key={index} className="mb-8 sm:mb-12">
             <div className="rounded overflow-hidden w-full max-w-[650px] aspect-video mx-auto relative">

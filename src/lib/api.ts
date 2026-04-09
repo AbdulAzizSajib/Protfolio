@@ -61,6 +61,21 @@ type ExperienceApiItem = {
   current: boolean;
 };
 
+export type About = {
+  id: string;
+  key: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  yearsOfExperience: number;
+  projectsCompleted: number;
+  clientsWorkedWith: number;
+  imageUrl?: string;
+  resumeUrl?: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type Project = {
   title: string;
   thumbnail: string;
@@ -250,5 +265,24 @@ export async function getProjects(): Promise<Project[]> {
   } catch {
     console.error("Failed to fetch projects");
     return [];
+  }
+}
+
+export async function getAbout(): Promise<About | null> {
+  try {
+    if (!API_URL_NEW) {
+      console.error("NEXT_PUBLIC_API_URL is not configured");
+      return null;
+    }
+
+    const res = await fetch(`${API_URL_NEW}/about`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data?.data ?? null;
+  } catch (error) {
+    console.error("Failed to fetch about information", error);
+    return null;
   }
 }

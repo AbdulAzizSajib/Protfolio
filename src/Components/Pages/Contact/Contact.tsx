@@ -64,8 +64,8 @@ const Contact = () => {
 
   return (
     <div>
-      <div className="flex justify-center items-center">
-        <h2 className="text-3xl sm:text-2xl lg:text-3xl sm:ml-5 uppercase font-bold whitespace-nowrap">Contact</h2>
+      <div className="flex justify-center items-center mb-4">
+        <h2 className="text-3xl sm:text-2xl lg:text-3xl sm:ml-5 uppercase font-bold whitespace-nowrap mb-4">Contact</h2>
         <div className="hidden sm:block w-full h-[1px] bg-zinc-700" />
       </div>
 

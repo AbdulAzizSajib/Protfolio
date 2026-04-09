@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`sticky top-0 z-50  flex border-b justify-between w-full navbar max-w-4xl mx-auto ${
+      className={`sticky top-0 z-50  flex items-center justify-between w-full navbar max-w-4xl mx-auto ${
         theme === "light" ? "bg-white text-black" : "bg-zinc-900 text-white"
       }`}
     >

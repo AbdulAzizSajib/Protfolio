@@ -26,13 +26,13 @@ const Intro = ({ profile, skills }: IntroProps) => {
             </h1>
 
             {/* Tagline - Medium */}
-            <p className="mt-4 sm:mt-5 lg:mt-4 tracking-wide text-lg sm:text-xl md:text-2xl lg:text-2xl font-semibold text-gray-600 dark:text-gray-400">
+            <p className="mt-4 sm:mt-5 lg:mt-4 tracking-wide text-lg sm:text-xl md:text-2xl lg:text-2xl font-semibold text-gray-200 ">
               <span>I&apos;m a </span>
               {profile?.tagline || " "}
             </p>
 
             {/* Bio - Small */}
-            <p className="mt-4 sm:mt-5 lg:mt-4 text-sm sm:text-base md:text-base lg:text-base leading-relaxed mx-auto lg:mx-0 text-gray-700 dark:text-gray-300 max-w-2xl">
+            <p className="mt-4 sm:mt-5 lg:mt-4 text-sm sm:text-base md:text-base lg:text-base leading-relaxed mx-auto lg:mx-0 text-gray-400 max-w-2xl">
               {profile?.bio}
             </p>
 
