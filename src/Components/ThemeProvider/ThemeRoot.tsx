@@ -24,7 +24,7 @@ const ThemeRoot = ({ children }: ThemeRootProps) => {
   return (
     <div
       style={{ fontFamily: "Fira Code, sans-serif" }}
-      className={`relative overflow-x-hidden ${
+      className={`relative overflow-x-clip ${
         theme === "light" ? "text-black bg-white" : "bg-zinc-900 text-white"
       }`}
     >

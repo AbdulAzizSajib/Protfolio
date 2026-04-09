@@ -3,6 +3,8 @@
 html,
 body {
   min-height: 100%;
+  scrollbar-color: #4f46e5 transparent;
+  scrollbar-width: thin;
 }
 
 * {

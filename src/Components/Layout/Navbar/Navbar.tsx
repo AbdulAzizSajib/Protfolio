@@ -4,6 +4,7 @@ import { Link } from "react-scroll";
 import { motion } from "framer-motion";
 import SliderToggle from "../../Toggle/SliderToggle";
 import useTheme from "../../Hooks/useTheme";
+import Eyes from "../../Eyes/Eyes";
 
 
 const Navbar = () => {
@@ -31,7 +32,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`sticky top-0 z-50 border-b flex justify-between w-full navbar max-w-4xl mx-auto ${
+      className={`sticky top-0 z-50  flex border-b justify-between w-full navbar max-w-4xl mx-auto ${
         theme === "light" ? "bg-white text-black" : "bg-zinc-900 text-white"
       }`}
     >
@@ -63,9 +64,10 @@ const Navbar = () => {
           smooth
           duration={500}
           offset={-200}
-          className="text-xl font-[jost] capitalize font-bold tracking-widest cursor-pointer"
+          className="flex items-center gap-2 text-xl font-[jost] capitalize font-bold tracking-widest cursor-pointer"
         >
           SAJIB
+          <Eyes size={24} />
         </Link>
       </div>
       <div className="hidden navbar-center lg:flex">
