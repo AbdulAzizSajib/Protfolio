@@ -8,3 +8,131 @@ body {
 * {
   box-sizing: border-box;
 }
+
+.circle-cursor-ring,
+.circle-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  border-radius: 999px;
+  transform: translate3d(-100px, -100px, 0);
+  transition: opacity 180ms ease;
+  will-change: transform, opacity;
+}
+
+@media (pointer: fine) {
+  .custom-circle-cursor-active,
+  .custom-circle-cursor-active * {
+    cursor: none !important;
+  }
+
+  .custom-circle-cursor-active input,
+  .custom-circle-cursor-active textarea,
+  .custom-circle-cursor-active [contenteditable="true"] {
+    cursor: text !important;
+  }
+}
+
+.shooting-stars-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.shooting-stars-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
+  background-size:
+    48px 48px,
+    48px 48px;
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    transparent 100%
+  );
+}
+
+.shooting-stars-grid-dark {
+  --grid-line-color: rgba(255, 255, 255, 0.08);
+  --star-color: rgba(255, 255, 255, 0.55);
+}
+
+.shooting-stars-grid-light {
+  --grid-line-color: rgba(17, 24, 39, 0.08);
+  --star-color: rgba(17, 24, 39, 0.45);
+}
+
+.shooting-star {
+  position: absolute;
+  top: var(--star-top);
+  left: var(--star-left);
+  border-radius: 999px;
+  opacity: 0 !important;
+  display: none !important;
+}
+
+.shooting-star-horizontal {
+  width: var(--star-length);
+  height: var(--star-size);
+  background: var(--star-color);
+  transform: translate3d(-280px, 0, 0);
+  animation: shooting-star-horizontal var(--star-duration) linear
+    var(--star-delay) infinite;
+}
+
+.shooting-star-vertical {
+  width: var(--star-size);
+  height: var(--star-length);
+  background: var(--star-color);
+  transform: translate3d(0, -280px, 0);
+  animation: shooting-star-vertical var(--star-duration) linear
+    var(--star-delay) infinite;
+}
+
+@keyframes shooting-star-horizontal {
+  0% {
+    opacity: 0;
+    transform: translate3d(-280px, 0, 0);
+  }
+  12% {
+    opacity: 0.58;
+  }
+  38% {
+    opacity: 0.22;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(560px, 0, 0);
+  }
+}
+
+@keyframes shooting-star-vertical {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -280px, 0);
+  }
+  12% {
+    opacity: 0.58;
+  }
+  38% {
+    opacity: 0.22;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 560px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shooting-star {
+    animation: none;
+    opacity: 0;
+  }
+}
