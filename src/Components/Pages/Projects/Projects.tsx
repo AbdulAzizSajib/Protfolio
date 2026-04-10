@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import useTheme from "../../Hooks/useTheme";
+import { trackEvent } from "../../../lib/analytics";
 import type { Project } from "../../../lib/api";
 
 type ProjectsProps = {
@@ -74,6 +75,9 @@ const ProjectHoverLink = ({ project, theme }: ProjectHoverLinkProps) => {
       rel={href !== "#" ? "noopener noreferrer" : undefined}
       initial="initial"
       whileHover="whileHover"
+      onClick={() => {
+        trackEvent("project_open", project.title);
+      }}
       className={`group relative flex items-center justify-between border-b-2 py-4 transition-colors duration-500 md:py-8 ${
         theme === "light"
           ? "border-neutral-300 hover:border-neutral-900"

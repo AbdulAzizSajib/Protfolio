@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import useTheme from "../../Hooks/useTheme";
+import { trackEvent } from "../../../lib/analytics";
 import type { Profile, Skill } from "../../../lib/api";
 
 type IntroProps = {
@@ -43,6 +44,9 @@ const Intro = ({ profile, skills }: IntroProps) => {
                   href={profile?.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => {
+                    trackEvent("cta_click", "linkedin");
+                  }}
                 >
                   <Icon className="text-2xl sm:text-2xl lg:text-3xl transition duration-300 transform hover:scale-110" icon="logos:linkedin-icon" />
                   <span className="hidden sm:inline font-medium">LinkedIn</span>
@@ -52,6 +56,9 @@ const Intro = ({ profile, skills }: IntroProps) => {
                   href={profile?.github}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => {
+                    trackEvent("cta_click", "github");
+                  }}
                 >
                   <Icon className="text-2xl sm:text-3xl lg:text-3xl transition duration-300 transform hover:scale-110" icon="mdi:github" />
                   <span className="hidden sm:inline font-medium">Github</span>
@@ -61,6 +68,9 @@ const Intro = ({ profile, skills }: IntroProps) => {
                   href={profile?.resumeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => {
+                    trackEvent("cta_click", "resume");
+                  }}
                 >
                   <Icon className="text-2xl sm:text-3xl lg:text-3xl transition duration-300 transform hover:scale-110" icon="ri:profile-line" />
                   <span className="hidden sm:inline font-medium">Resume</span>

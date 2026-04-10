@@ -1,10 +1,11 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdArrowForward } from "react-icons/io";
 import { MdEmail, MdLocalPhone } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
+import { trackEvent } from "../../../lib/analytics";
 
 type FormData = {
   name: string;
@@ -21,6 +22,30 @@ const Contact = () => {
     message: "",
   });
   const [submitting, setSubmitting] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    let hasTrackedView = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry?.isIntersecting && !hasTrackedView) {
+          hasTrackedView = true;
+          trackEvent("section_view", "contact");
+        }
+      },
+      { threshold: 0.4 },
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -56,6 +81,7 @@ const Contact = () => {
       const data = await res.json();
 
       if (data.success) {
+        trackEvent("contact_submit", "contact");
         toast.success("Message sent successfully!");
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
@@ -75,7 +101,7 @@ const Contact = () => {
          <p className="font-light capitalize">Fill in the form to start a conversation</p>
       </div>
 
-      <section id="contact" className="py-6">
+      <section id="contact" ref={sectionRef} className="py-6">
         <div className="grid max-w-6xl grid-cols-1 px-4 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
           <div className="flex flex-col justify-center py-6 md:py-0 md:px-6">
             <h1 className="mb-8 text-4xl font-bold">Get in touch</h1>
