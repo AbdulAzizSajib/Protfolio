@@ -58,7 +58,7 @@ export default function About({ about }: AboutProps) {
           <div className="space-y-6">
             {/* Description Text */}
             <div
-              className={`prose prose-sm dark:prose-invert max-w-none leading-relaxed text-justify ${
+              className={`prose prose-sm dark:prose-invert max-w-none leading-relaxed text-left md:text-justify hyphens-auto ${
                 theme === "light"
                   ? "text-gray-700 prose-headings:text-black"
                   : "text-gray-300 prose-headings:text-white"

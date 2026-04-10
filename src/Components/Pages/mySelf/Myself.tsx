@@ -28,16 +28,18 @@ const Myself = ({ experiences }: MyselfProps) => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8"
+              className="grid grid-cols-1  gap-6 lg:gap-8"
             >
-              <div className="lg:col-span-2">
-                <p className={`text-base sm:text-lg font-medium ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>
-                  {experience.period}
-                </p>
-              </div>
+              
+                
+             
 
-              <div className="lg:col-span-3">
+            
                 <div className="mb-3 sm:mb-4 space-y-2">
+
+                   <p className={`text-sm sm:text-xl my-4 ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>
+                        {experience.company} &bull; <span className="font-bold">{experience.type}</span>
+                      </p>
                   <div className="flex items-center gap-5">
                     {experience.companyLogo && (
                       <Image
@@ -48,32 +50,18 @@ const Myself = ({ experiences }: MyselfProps) => {
                         height={48}
                       />
                     )}
-                    <h3 className="text-xl sm:text-2xl lg:text-2xl font-bold mb-1 sm:mb-2">{experience.position}</h3>
+                    <div>
+                      
+                      <h3 className="text-xl sm:text-2xl lg:text-4xl font-bold">{experience.position}</h3>
+                     
+                       <p className={`text-base sm:text-lg font-medium ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>
+                  {experience.period}
+                </p>
+                    </div>
                   </div>
-                  <p className={`text-sm sm:text-base ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>
-                    {experience.company} &bull; <span className="font-bold">{experience.type}</span>
-                  </p>
-                  <p className={`text-sm sm:text-base flex flex-wrap gap-2 ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>
-                    {experience.technologies?.map((tech, techIndex) => (
-                      <span key={techIndex} className="px-2 py-.5 text-sm bg-blue-100 text-blue-700 rounded-full">
-                        {tech}
-                      </span>
-                    ))}
-                  </p>
+                 
                 </div>
-                <ul
-                  className={`text-sm sm:text-base lg:text-base font-light ${
-                    theme === "light" ? "text-gray-700" : "text-gray-300"
-                  } max-w-4xl list-disc list-inside space-y-2`}
-                >
-                  {(experience.description.match(/[^.!?]+[.!?]+/g) || [experience.description])?.map((sentence, index) => {
-                    const trimmedSentence = sentence.trim();
-                    return trimmedSentence ? (
-                      <li key={index}>{trimmedSentence}</li>
-                    ) : null;
-                  })}
-                </ul>
-              </div>
+              
             </motion.div>
           ))}
         </div>

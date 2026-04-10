@@ -77,6 +77,7 @@ export type About = {
 };
 
 export type Project = {
+  id: string;
   title: string;
   thumbnail: string;
   liveLink: string;
@@ -100,6 +101,7 @@ type ProjectApiSkill =
     };
 
 type ProjectApiItem = {
+  id: string;
   title: string;
   description?: string;
   coverImage?: string;
@@ -243,6 +245,7 @@ export async function getProjects(): Promise<Project[]> {
           .filter(Boolean);
 
         return {
+          id: project.id,
           title: project.title,
           thumbnail,
           liveLink: project.liveUrl ?? "#",
