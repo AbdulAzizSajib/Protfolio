@@ -5,19 +5,20 @@ import { FaLocationDot } from "react-icons/fa6";
 import { IoMdArrowForward } from "react-icons/io";
 import { MdEmail, MdLocalPhone } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 type FormData = {
   name: string;
   email: string;
-  conversation: string;
+  subject: string;
+  message: string;
 };
 
 const Contact = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
-    conversation: "",
+    subject: "",
+    message: "",
   });
   const [submitting, setSubmitting] = useState(false);
 
@@ -32,7 +33,7 @@ const Contact = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.conversation) {
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
       toast.error("Please fill in all fields");
       return;
     }
@@ -41,19 +42,24 @@ const Contact = () => {
 
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "";
-      const res = await fetch(`${apiUrl}/api/email`, {
+      const res = await fetch(`${apiUrl}/contact-messages`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
       });
 
       const data = await res.json();
 
       if (data.success) {
-        toast.success("Email sent successfully!");
-        setFormData({ name: "", email: "", conversation: "" });
+        toast.success("Message sent successfully!");
+        setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
-        toast.error(data.message || "Failed to send email");
+        toast.error(data.message || "Failed to send message");
       }
     } catch {
       toast.error("Failed to connect to server");
@@ -64,9 +70,9 @@ const Contact = () => {
 
   return (
     <div>
-      <div className="flex justify-center items-center mb-4">
-        <h2 className="text-3xl sm:text-2xl lg:text-3xl sm:ml-5 uppercase font-bold whitespace-nowrap mb-4">Contact</h2>
-        <div className="hidden sm:block w-full h-[1px] bg-zinc-700" />
+      <div className="flex flex-col justify-center items-center mt-12 lg:mt-16 ">
+        <h2 className="text-3xl sm:text-2xl lg:text-3xl sm:ml-5 capitalize font-bold whitespace-nowrap mb-4">Have a project in mind?</h2>
+         <p className="font-light capitalize">Fill in the form to start a conversation</p>
       </div>
 
       <section id="contact" className="py-6">
@@ -78,10 +84,7 @@ const Contact = () => {
                 <FaLocationDot className="mr-2 text-lg" />
                 <span>Dhaka Bangladesh</span>
               </p>
-              <p className="flex items-center">
-                <MdLocalPhone className="mr-2 text-lg" />
-                <span>01782521705</span>
-              </p>
+             
               <p className="flex items-center">
                 <MdEmail className="mr-2 text-lg" />
                 <span>abdulazizsajib@gmail.com</span>
@@ -90,7 +93,7 @@ const Contact = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="flex flex-col py-6 space-y-6 md:py-0 md:px-6">
-            <p className="font-light capitalize">Fill in the form to start a conversation</p>
+           
 
             <label className="block">
               <span className="mb-1">Your name</span>
@@ -115,11 +118,22 @@ const Contact = () => {
             </label>
 
             <label className="block">
+              <span className="mb-1">Subject</span>
+              <input
+                type="text"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                className="block w-full text-black rounded-md shadow-sm input-bordered input bg-white"
+              />
+            </label>
+
+            <label className="block">
               <span className="mb-1">Message</span>
               <textarea
                 rows={3}
-                name="conversation"
-                value={formData.conversation}
+                name="message"
+                value={formData.message}
                 onChange={handleChange}
                 className="block w-full text-black rounded-md textarea-bordered textarea bg-white shadow-sm"
               />

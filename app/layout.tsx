@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 import Providers from "./providers";
 import Navbar from "../src/Components/Layout/Navbar/Navbar";
 import Footer from "../src/Components/Layout/Footer/Footer";

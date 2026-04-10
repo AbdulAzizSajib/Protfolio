@@ -27,7 +27,7 @@ const VenetianPreloader = () => {
             {Array.from({ length: SLAT_COUNT }).map((_, i) => (
               <motion.div
                 key={i}
-                className="flex-1 bg-zinc-800 origin-left"
+                className="flex-1 bg-zinc-900 origin-left"
                 initial={{ scaleX: 1 }}
                 animate={{ scaleX: 0 }}
                 transition={{
