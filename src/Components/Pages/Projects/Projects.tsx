@@ -26,7 +26,12 @@ const Projects = ({ projects }: ProjectsProps) => {
 
       <div className="mx-auto max-w-5xl">
         {projects.map((project, index) => (
-          <ProjectHoverLink key={`${project.title}-${index}`} project={project} theme={theme} />
+          <ProjectHoverLink
+            key={`${project.title}-${index}`}
+            project={project}
+            theme={theme}
+            isLast={index === projects.length - 1}
+          />
         ))}
       </div>
     </section>
@@ -36,9 +41,10 @@ const Projects = ({ projects }: ProjectsProps) => {
 type ProjectHoverLinkProps = {
   project: Project;
   theme: string;
+  isLast?: boolean;
 };
 
-const ProjectHoverLink = ({ project, theme }: ProjectHoverLinkProps) => {
+const ProjectHoverLink = ({ project, theme, isLast = false }: ProjectHoverLinkProps) => {
   const ref = useRef<HTMLAnchorElement | null>(null);
 
   const x = useMotionValue(0);
@@ -82,7 +88,9 @@ const ProjectHoverLink = ({ project, theme }: ProjectHoverLinkProps) => {
       onClick={() => {
         trackEvent("project_open", project.title);
       }}
-      className={`group relative flex items-center justify-between border-b-2 py-4 transition-colors duration-500 md:py-8 ${
+    className={`group relative flex items-center justify-between py-4 transition-colors duration-500 md:py-8 ${
+      isLast ? "" : "border-b-2"
+    } ${
         theme === "light"
           ? "border-neutral-300 hover:border-neutral-900"
           : "border-neutral-700 hover:border-neutral-50"
