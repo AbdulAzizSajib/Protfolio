@@ -6,6 +6,8 @@ import { IoMdArrowForward } from "react-icons/io";
 import { MdEmail, MdLocalPhone } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import { trackEvent } from "../../../lib/analytics";
+import TextDoodle from "../../TextDoodle/TextDoodle";
+import useTheme from "../../Hooks/useTheme";
 
 type FormData = {
   name: string;
@@ -94,10 +96,16 @@ const Contact = () => {
     }
   };
 
+   const { theme } = useTheme();
+
   return (
     <div>
       <div className="flex flex-col justify-center items-center mt-12 lg:mt-16 ">
-        <h2 className="text-3xl sm:text-2xl lg:text-3xl sm:ml-5 capitalize font-bold whitespace-nowrap mb-4">Have a project in mind?</h2>
+
+      
+        <h2 className="text-3xl sm:text-2xl lg:text-3xl sm:ml-5 capitalize font-bold whitespace-nowrap mb-4">
+          <TextDoodle type="underline"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#26acff"}>  Have a project in mind?</TextDoodle>
+      </h2>
          <p className="font-light capitalize">Fill in the form to start a conversation</p>
       </div>
 

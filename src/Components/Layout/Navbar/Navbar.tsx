@@ -15,11 +15,11 @@ const Navbar = () => {
     <>
       <li>
         <Link
-          to="about"
+          to="experiance"
           smooth
           duration={500}
           onClick={() => {
-            trackEvent("nav_click", "about");
+            trackEvent("nav_click", "experiance");
           }}
         >
           Work Experiance

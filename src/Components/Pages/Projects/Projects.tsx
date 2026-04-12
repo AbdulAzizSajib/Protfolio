@@ -1,11 +1,12 @@
 "use client";
-
+import { Icon } from "@iconify/react";
 import { useRef } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import useTheme from "../../Hooks/useTheme";
 import { trackEvent } from "../../../lib/analytics";
 import type { Project } from "../../../lib/api";
+import TextDoodle from "../../TextDoodle/TextDoodle";
 
 type ProjectsProps = {
   projects: Project[];
@@ -17,7 +18,10 @@ const Projects = ({ projects }: ProjectsProps) => {
   return (
     <section id="projects" className={theme === "light" ? "text-black p-4 lg:p-0" : " text-white p-4 lg:p-0"}>
       <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center w-full mb-4">
-        <h2 className="text-2xl lg:text-3xl font-bold mb-4 text-end lg:w-[15%]">Projects</h2>
+        <h2 className="font-bold text-2xl sm:text-3xl md:text-3xl mb-4">
+                  <TextDoodle type="underline"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#26acff"}>Projects</TextDoodle>
+                  
+                  </h2>
       </div>
 
       <div className="mx-auto max-w-5xl">

@@ -2,6 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import useTheme from "../../Hooks/useTheme";
+import TextDoodle from "../../TextDoodle/TextDoodle";
 import type { About as AboutData } from "../../../lib/api";
 
 type AboutProps = {
@@ -52,13 +53,19 @@ export default function About({ about }: AboutProps) {
       <div className="space-y-12">
         {/* Main Content */}
         <div className="grid grid-cols-1 gap-6">
-          <h2 className="text-3xl sm:text-3xl font-bold mb-4">About me</h2>
+          <h2 className="text-3xl sm:text-3xl font-bold mb-4"> <TextDoodle
+    type="underline"
+    color={theme === "light" ? "#818cf8" : "#26acff"}
+    strokeWidth={6}
+  >
+    About me
+  </TextDoodle></h2>
           
           {/* Description */}
           <div className="space-y-6">
             {/* Description Text */}
             <div
-              className={`prose prose-sm dark:prose-invert max-w-none leading-relaxed text-left md:text-justify hyphens-auto ${
+              className={`prose prose-sm dark:prose-invert max-w-none leading-relaxed text-left  hyphens-auto ${
                 theme === "light"
                   ? "text-gray-700 prose-headings:text-black"
                   : "text-gray-300 prose-headings:text-white"

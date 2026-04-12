@@ -1,10 +1,11 @@
 "use client";
-
+import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import useTheme from "../../Hooks/useTheme";
 import type { Skill } from "../../../lib/api";
+import TextDoodle from "../../TextDoodle/TextDoodle";
 
 type StackProps = {
   skills: Skill[];
@@ -48,7 +49,10 @@ const Stack = ({ skills }: StackProps) => {
     <section id="stack" className="px-4 lg:p-0">
       <div className="">
         <div className="flex flex-col sm:flex-row flex-wrap items-center justify-start gap-4 sm:gap-6 mb-4">
-          <h2 className="font-bold text-2xl sm:text-3xl md:text-3xl mb-4">Tech Stack</h2>
+          <h2 className="font-bold text-2xl sm:text-3xl md:text-3xl mb-4">
+            <TextDoodle type="underline"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#26acff"}>Tech Stack</TextDoodle>
+            
+            </h2>
         </div>
 
         <div className="flex flex-wrap items-center justify-start gap-3 sm:gap-4 md:gap-5">

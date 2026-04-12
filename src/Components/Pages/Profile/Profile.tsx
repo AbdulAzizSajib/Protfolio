@@ -27,7 +27,7 @@ const Intro = ({ profile, skills }: IntroProps) => {
             </h1>
 
             {/* Tagline - Medium */}
-            <p className="mt-4 sm:mt-5 lg:mt-4 tracking-wide text-lg sm:text-xl md:text-2xl lg:text-2xl font-semibold text-gray-200 ">
+            <p className="mt-4 sm:mt-5 lg:mt-4 tracking-wide text-lg sm:text-xl md:text-2xl lg:text-2xl font-semibold dark:text-gray-400 text-gray-200">
               <span>I&apos;m a </span>
               {profile?.tagline || " "}
             </p>
@@ -72,7 +72,7 @@ const Intro = ({ profile, skills }: IntroProps) => {
                     trackEvent("cta_click", "resume");
                   }}
                 >
-                  <Icon className="text-2xl sm:text-3xl lg:text-3xl transition duration-300 transform hover:scale-110" icon="ri:profile-line" />
+                  <Icon className="text-2xl sm:text-3xl lg:text-3xl transition duration-300 transform hover:scale-110" icon="ph:read-cv-logo-light" />
                   <span className="hidden sm:inline font-medium">Resume</span>
                 </a>
               </div>

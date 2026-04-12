@@ -1,9 +1,10 @@
 "use client";
-
+import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import useTheme from "../../Hooks/useTheme";
 import type { WorkExperience } from "../../../lib/api";
+import TextDoodle from "../../TextDoodle/TextDoodle";
 
 type MyselfProps = {
   experiences: WorkExperience[];
@@ -13,10 +14,16 @@ const Myself = ({ experiences }: MyselfProps) => {
   const { theme } = useTheme();
 
   return (
-    <div id="about" className="mx-auto transition-colors py-12 sm:py-16 lg:py-20 px-4">
+    <div id="experiance" className="mx-auto transition-colors py-12 sm:py-16 lg:py-20 px-4">
       <div>
         <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center w-full mb-4">
-          <h2 className="text-2xl lg:text-3xl font-bold mb-4 whitespace-nowrap capitalize">Work Experience</h2>
+
+  <h2 className="font-bold text-2xl sm:text-3xl md:text-3xl mb-4">
+            <TextDoodle type="underline"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#26acff"}>Work Experience</TextDoodle>
+            
+            </h2>
+
+       
          
         </div>
 
@@ -30,16 +37,7 @@ const Myself = ({ experiences }: MyselfProps) => {
               viewport={{ once: true }}
               className="grid grid-cols-1  gap-6 lg:gap-8"
             >
-              
-                
-             
-
-            
-                <div className="mb-3 sm:mb-4 space-y-2">
-
-                   <p className={`text-sm sm:text-xl my-4 ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>
-                        {experience.company} &bull; <span className="font-bold">{experience.type}</span>
-                      </p>
+               <div className="mb-3 sm:mb-4 space-y-2">
                   <div className="flex items-center gap-5">
                     {experience.companyLogo && (
                       <Image
@@ -50,13 +48,14 @@ const Myself = ({ experiences }: MyselfProps) => {
                         height={48}
                       />
                     )}
-                    <div>
-                      
+                    <div className="flex flex-col">
+                      <p className={`text-sm sm:text-xl my-1 ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>
+                        {experience.company} &bull; <span className="font-bold">{experience.type}</span>
+                      </p>
                       <h3 className="text-xl sm:text-2xl lg:text-4xl font-bold">{experience.position}</h3>
-                     
-                       <p className={`text-base sm:text-lg font-medium ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>
-                  {experience.period}
-                </p>
+                      <p className={`text-base sm:text-lg font-medium ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>
+                        {experience.period}
+                      </p>
                     </div>
                   </div>
                  
