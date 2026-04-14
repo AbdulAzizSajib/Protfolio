@@ -18,7 +18,7 @@ const Projects = ({ projects }: ProjectsProps) => {
     <section id="projects" className={theme === "light" ? "text-black p-4 lg:p-0" : " text-white p-4 lg:p-0"}>
       <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center w-full mb-4">
         <h2 className="font-bold text-2xl sm:text-3xl md:text-3xl mb-4">
-                  <TextDoodle type="underline"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#26acff"}>Projects</TextDoodle>
+                  <TextDoodle type="underline"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#4F46E5"}>Projects</TextDoodle>
                   
                   </h2>
       </div>

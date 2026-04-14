@@ -19,7 +19,7 @@ const Myself = ({ experiences }: MyselfProps) => {
         <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center w-full mb-4">
 
   <h2 className="font-bold text-2xl sm:text-3xl md:text-3xl mb-4">
-            <TextDoodle type="underline"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#26acff"}>Work Experience</TextDoodle>
+            <TextDoodle type="underline"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#4F46E5"}>Work Experience</TextDoodle>
             
             </h2>
 
@@ -50,7 +50,7 @@ const Myself = ({ experiences }: MyselfProps) => {
                     )}
                     <div className="flex flex-col">
                       <p className={`text-sm sm:text-xl my-1 ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>
-                        {experience.company} &bull; <span className="font-bold">{experience.type}</span>
+                        {experience.company}
                       </p>
                       <h3 className="text-xl sm:text-2xl lg:text-4xl font-bold">{experience.position}</h3>
                       <p className={`text-base sm:text-lg font-medium ${theme === "light" ? "text-gray-600" : "text-gray-400"}`}>

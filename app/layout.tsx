@@ -6,6 +6,7 @@ import Navbar from "../src/Components/Layout/Navbar/Navbar";
 import Footer from "../src/Components/Layout/Footer/Footer";
 import ThemeRoot from "../src/Components/ThemeProvider/ThemeRoot";
 import VenetianPreloader from "../src/Components/Preloader/VenetianPreloader";
+import ScrollToTop from "../src/Components/ScrollToTop/ScrollToTop";
 
 export const metadata: Metadata = {
   title: "Sajib | Portfolio",
@@ -26,6 +27,7 @@ export default function RootLayout({
             <Navbar />
             <main className="min-h-screen max-w-4xl mx-auto">{children}</main>
             <Footer />
+            <ScrollToTop />
           </ThemeRoot>
         </Providers>
       </body>

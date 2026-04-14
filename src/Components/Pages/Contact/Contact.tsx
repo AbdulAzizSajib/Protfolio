@@ -78,7 +78,7 @@ const Contact = () => {
 
       
         <h2 className="text-3xl sm:text-2xl lg:text-3xl sm:ml-5 capitalize font-bold whitespace-nowrap mb-4">
-          <TextDoodle type="highlight"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#26acff"}>  Have a project in mind?</TextDoodle>
+          <TextDoodle type="highlight"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#4F46E5"}>  Have a project in mind?</TextDoodle>
       </h2>
          <p className="font-light capitalize">Fill in the form to start a conversation</p>
       </div>
