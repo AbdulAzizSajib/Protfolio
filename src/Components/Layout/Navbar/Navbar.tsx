@@ -4,7 +4,7 @@ import { Link } from "react-scroll";
 import { motion } from "framer-motion";
 import SliderToggle from "../../Toggle/SliderToggle";
 import useTheme from "../../Hooks/useTheme";
-import Eyes from "../../Eyes/Eyes";
+// import Eyes from "../../Eyes/Eyes";
 
 
 const Navbar = () => {
@@ -80,7 +80,7 @@ const Navbar = () => {
           className="flex items-center gap-2 text-xl font-[jost] capitalize font-bold tracking-widest cursor-pointer"
         >
           SAJIB
-          <Eyes size={24} />
+          {/* <Eyes size={24} /> */}
         </Link>
       </div>
       <div className="hidden navbar-center lg:flex">
