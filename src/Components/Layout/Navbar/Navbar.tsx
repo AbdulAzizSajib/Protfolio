@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import SliderToggle from "../../Toggle/SliderToggle";
 import useTheme from "../../Hooks/useTheme";
 import Eyes from "../../Eyes/Eyes";
-import { trackEvent } from "../../../lib/analytics";
 
 
 const Navbar = () => {
@@ -18,9 +17,6 @@ const Navbar = () => {
           to="experiance"
           smooth
           duration={500}
-          onClick={() => {
-            trackEvent("nav_click", "experiance");
-          }}
         >
           Work Experiance
         </Link>
@@ -31,9 +27,6 @@ const Navbar = () => {
           smooth
           duration={500}
           offset={-90}
-          onClick={() => {
-            trackEvent("nav_click", "projects");
-          }}
         >
           Projects
         </Link>
@@ -43,9 +36,6 @@ const Navbar = () => {
           to="contact"
           smooth
           duration={500}
-          onClick={() => {
-            trackEvent("contact_open", "contact");
-          }}
         >
           Contact
         </Link>
@@ -88,9 +78,6 @@ const Navbar = () => {
           duration={500}
           offset={-200}
           className="flex items-center gap-2 text-xl font-[jost] capitalize font-bold tracking-widest cursor-pointer"
-          onClick={() => {
-            trackEvent("nav_click", "home");
-          }}
         >
           SAJIB
           <Eyes size={24} />

@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import useTheme from "../../Hooks/useTheme";
-import { trackEvent } from "../../../lib/analytics";
 import type { Project } from "../../../lib/api";
 import TextDoodle from "../../TextDoodle/TextDoodle";
 
@@ -85,9 +84,6 @@ const ProjectHoverLink = ({ project, theme, isLast = false }: ProjectHoverLinkPr
       rel={href !== "#" ? "noopener noreferrer" : undefined}
       initial="initial"
       whileHover="whileHover"
-      onClick={() => {
-        trackEvent("project_open", project.title);
-      }}
     className={`group relative flex items-center justify-between py-4 transition-colors duration-500 md:py-8 ${
       isLast ? "" : "border-b-2"
     } ${
