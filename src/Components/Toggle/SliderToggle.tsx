@@ -4,108 +4,150 @@ import useTheme from "../Hooks/useTheme";
 
 const SliderToggle = () => {
   const { theme, toggleTheme } = useTheme();
-  const isChecked = theme === "dark";
+  const isDark = theme === "dark";
 
   return (
     <>
       <style>{`
-        .toggle-wrapper {
-          display: flex;
-          justify-content: center;
-          align-items: center;
+        .switch {
+          font-size: 15px;
           position: relative;
-
-          height: 1.7em;     
-          padding: 0 .1em;   
-
-          border-radius: .5em;
- 
-
-
-          background-image: linear-gradient(to bottom, #d5d5d5, #e8e8e8);
-      
-          font-size: 1.2em;
+          display: inline-block;
+          width: 5em;
+          height: 2.5em;
+          user-select: none;
         }
 
-        .toggle-checkbox {
-          appearance: none;
+        .switch .cb {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+
+        .toggle {
           position: absolute;
-          z-index: 1;
-          border-radius: inherit;
+          cursor: pointer;
           width: 100%;
           height: 100%;
-          font: inherit;
-          opacity: 0;
-          cursor: pointer;
+          background-color: #373737 !important;
+          border-radius: 0.1em;
+          transition: 0.4s;
+          text-transform: uppercase;
+          font-weight: 700;
+          overflow: hidden;
+          box-shadow: -0.3em 0 0 0 #373737, -0.3em 0.3em 0 0 #373737,
+            0.3em 0 0 0 #373737, 0.3em 0.3em 0 0 #373737, 0 0.3em 0 0 #373737;
         }
 
-        .toggle-container {
+        .toggle > .left {
+          position: absolute;
           display: flex;
+          width: 50%;
+          height: 88%;
+          background-color: #f3f3f3;
+          color: #373737;
+          left: 0;
+          bottom: 0;
           align-items: center;
-          position: relative;
-          border-radius: .375em;
-          width: 3em;
-          height: 1.5em;
-          background-color: #e8e8e8;
-          // box-shadow: inset 0 0 .0625em .125em rgb(255 255 255 / .2), inset 0 .0625em .125em rgb(0 0 0 / .4);
-          transition: background-color .4s linear;
-        }
-
-        .toggle-checkbox:checked + .toggle-container {
-          background-color: #4F46E5;
-        }
-
-        .toggle-button {
-          display: flex;
           justify-content: center;
+          transform-origin: right;
+          transform: rotateX(10deg);
+          transform-style: preserve-3d;
+          transition: all 150ms;
+        }
+
+        .left::before {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-color: rgb(206, 206, 206);
+          transform-origin: center left;
+          transform: rotateY(90deg);
+        }
+
+        .left::after {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-color: rgb(112, 112, 112);
+          transform-origin: center bottom;
+          transform: rotateX(90deg);
+        }
+
+        .toggle > .right {
+          position: absolute;
+          display: flex;
+          width: 50%;
+          height: 88%;
+          background-color: #f3f3f3;
+          color: rgb(206, 206, 206);
+          right: 1px;
+          bottom: 0;
           align-items: center;
+          justify-content: center;
+          transform-origin: left;
+          transform: rotateX(10deg) rotateY(-45deg);
+          transform-style: preserve-3d;
+          transition: all 150ms;
+        }
+
+        .right::before {
           position: absolute;
-          left: .0625em;
-          border-radius: .3125em;
-          width: 1.375em;
-          height: 1.375em;
-          background-color: #e8e8e8;
-          box-shadow: inset 0 -.0625em .0625em .125em rgb(0 0 0 / .1), inset 0 -.125em .0625em rgb(0 0 0 / .2), inset 0 .1875em .0625em rgb(255 255 255 / .3), 0 .125em .125em rgb(0 0 0 / .5);
-          transition: left .4s;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-color: rgb(206, 206, 206);
+          transform-origin: center right;
+          transform: rotateY(-90deg);
         }
 
-        .toggle-checkbox:checked + .toggle-container > .toggle-button {
-          left: 1.5625em;
-        }
-
-        .toggle-button-circles-container {
-          display: grid;
-          grid-template-columns: repeat(3, min-content);
-          gap: .125em;
+        .right::after {
           position: absolute;
-          margin: 0 auto;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-color: rgb(112, 112, 112);
+          transform-origin: center bottom;
+          transform: rotateX(90deg);
         }
 
-        .toggle-button-circle {
-          border-radius: 50%;
-          width: .125em;
-          height: .125em;
-          background-image: radial-gradient(circle at 50% 0, #f5f5f5, #c4c4c4);
+        /* OFF (ডান পাশে) - ডার্ক মোডে */
+        .switch input:not(:checked) + .toggle > .left {
+          transform: rotateX(10deg) rotateY(45deg);
+          color: rgb(206, 206, 206);
+        }
+
+        .switch input:not(:checked) + .toggle > .right {
+          transform: rotateX(10deg) rotateY(0deg);
+          color: #487bdb;
+        }
+
+        /* ON (বাম পাশে) - লাইট মোডে */
+        .switch input:checked + .toggle > .left {
+          transform: rotateX(10deg) rotateY(0deg);
+          color: #373737;
+        }
+
+        .switch input:checked + .toggle > .right {
+          transform: rotateX(10deg) rotateY(-45deg);
+          color: rgb(206, 206, 206);
         }
       `}</style>
 
-      <div className="toggle-wrapper">
+      <label className="switch">
         <input
-          className="toggle-checkbox"
+          className="cb"
           type="checkbox"
-          checked={isChecked}
-          onChange={() => toggleTheme(isChecked ? "light" : "dark")}
+          checked={!isDark}  // ডার্ক মোডে unchecked (OFF ডান পাশে), লাইট মোডে checked (ON বাম পাশে)
+          onChange={() => toggleTheme(isDark ? "light" : "dark")}
         />
-        <div className="toggle-container">
-          <div className="toggle-button">
-            <div className="toggle-button-circles-container">
-              {Array.from({ length: 12 }).map((_, i) => (
-                <div key={i} className="toggle-button-circle" />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+        <span className="toggle">
+          <span className="left">ON</span>   {/* বাম পাশে ON */}
+          <span className="right">OFF</span>  {/* ডান পাশে OFF */}
+        </span>
+      </label>
     </>
   );
 };

@@ -69,7 +69,7 @@ export default function About({ about }: AboutProps) {
         <div className="grid grid-cols-1 gap-6">
           <h2 className="text-3xl sm:text-3xl font-bold mb-4">
             <TextDoodle
-              type="underline"
+              type="highlight"
               color={theme === "light" ? "#818cf8" : "#4F46E5"}
               strokeWidth={6}
             >
