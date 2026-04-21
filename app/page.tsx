@@ -18,10 +18,17 @@ export default async function Page() {
   return (
     <div>
       <Profile profile={profile} skills={skills} />
-      <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mt-12 lg:mt-16 ">
-      <About about={about} />
-      <Stack skills={skills} />       
+      
+      {/* Grid layout for About and Stack */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mt-12 lg:mt-16">
+        <div className="col-span-7">
+          <About about={about} />
+        </div>
+        <div className="col-span-5">
+          <Stack skills={skills} />       
+        </div>
       </div>
+      
       <Experiance experiences={experiences} />  
       <Projects projects={projects} />  
       <Contact />
