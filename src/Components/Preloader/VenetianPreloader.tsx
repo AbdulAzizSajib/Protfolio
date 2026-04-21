@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const SLAT_COUNT = 10;
 
@@ -52,9 +53,10 @@ const VenetianPreloader = () => {
               animate={{ opacity: [0.4, 1, 0.4] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
-              SAJIB
+             {/*  */}
+              <Image src="/android-chrome-192x192.png" alt="Logo" width={100} height={100} />
             </motion.span>
-            <div className="flex gap-1">
+            {/* <div className="flex gap-1">
               {[0, 1, 2].map((i) => (
                 <motion.div
                   key={i}
@@ -67,7 +69,7 @@ const VenetianPreloader = () => {
                   }}
                 />
               ))}
-            </div>
+            </div> */}
           </motion.div>
         </motion.div>
       )}

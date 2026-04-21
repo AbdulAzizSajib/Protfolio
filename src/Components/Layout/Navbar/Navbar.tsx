@@ -4,6 +4,7 @@ import { Link } from "react-scroll";
 import { motion } from "framer-motion";
 import SliderToggle from "../../Toggle/SliderToggle";
 import useTheme from "../../Hooks/useTheme";
+import Image from "next/image";
 // import Eyes from "../../Eyes/Eyes";
 
 
@@ -72,6 +73,8 @@ const Navbar = () => {
           </ul>
         </div>
 
+      
+
         <Link
           to="home"
           smooth
@@ -79,9 +82,9 @@ const Navbar = () => {
           offset={-200}
           className="flex items-center gap-2 text-xl font-[jost] capitalize font-bold tracking-widest cursor-pointer"
         >
-          SAJIB
-          {/* <Eyes size={24} /> */}
+           <Image src="/android-chrome-192x192.png" alt="Logo" width={40} height={40} />
         </Link>
+          {/* <Eyes size={24} /> */}
       </div>
       <div className="hidden navbar-center lg:flex">
         <motion.ul
