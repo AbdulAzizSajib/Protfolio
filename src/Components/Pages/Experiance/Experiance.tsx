@@ -19,7 +19,7 @@ const Myself = ({ experiences }: MyselfProps) => {
         <div className="flex flex-col sm:flex-row justify-start items-start sm:items-center w-full mb-4">
 
   <h2 className="font-bold text-2xl sm:text-3xl md:text-3xl mb-4">
-            <TextDoodle type="highlight"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#4F46E5"}>Work Experience</TextDoodle>
+            <TextDoodle type="highlight"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#26acff"}>Work Experience</TextDoodle>
             
             </h2>
 

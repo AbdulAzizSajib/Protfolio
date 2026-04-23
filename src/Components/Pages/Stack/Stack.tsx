@@ -50,7 +50,7 @@ const Stack = ({ skills }: StackProps) => {
       <div className="">
         <div className="flex flex-col sm:flex-row flex-wrap items-center justify-start gap-4 sm:gap-6 mb-4">
           <h2 className="font-bold text-2xl sm:text-3xl md:text-3xl mb-4">
-            <TextDoodle type="highlight"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#4F46E5"}>Tech Stack</TextDoodle>
+            <TextDoodle type="highlight"  strokeWidth={6} color={theme === "light" ? "#818cf8" : "#26acff"}>Tech Stack</TextDoodle>
             
             </h2>
         </div>

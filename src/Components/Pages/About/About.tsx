@@ -70,7 +70,7 @@ export default function About({ about }: AboutProps) {
           <h2 className="text-3xl sm:text-3xl font-bold mb-4">
             <TextDoodle
               type="highlight"
-              color={theme === "light" ? "#818cf8" : "#4F46E5"}
+              color={theme === "light" ? "#818cf8" : "#26acff"}
               strokeWidth={6}
             >
               About me
