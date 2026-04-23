@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import useTheme from "../../Hooks/useTheme";
 
 const Footer = () => {
@@ -9,13 +10,23 @@ const Footer = () => {
 
   return (
     <div
-      className={`p-2 border-t transition-colors duration-300 ${
+      className={`p-2  transition-colors duration-300 flex items-center justify-center ${
         isLight
-          ? "bg-gray-50 border-gray-200 text-gray-800"
-          : "bg-zinc-900 border-zinc-700 text-gray-100"
+          ? "  text-gray-800"
+          : "  text-gray-100"
       }`}
     >
       <p className="text-center text-sm sm:text-base">Copyright © {currentYear} - All rights reserved</p>
+      <p className="mx-2">|</p>
+      <a 
+        href="https://stacksymbols.vercel.app/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="text-center text-sm sm:text-base hover:underline"
+      >
+        Stack Symbols
+        <Icon icon="mdi:open-in-new" className="inline-block ml-1" />
+      </a>
     </div>
   );
 };
