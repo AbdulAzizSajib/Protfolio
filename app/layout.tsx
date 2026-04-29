@@ -9,7 +9,7 @@ import VenetianPreloader from "../src/Components/Preloader/VenetianPreloader";
 import ScrollToTop from "../src/Components/ScrollToTop/ScrollToTop";
 
 export const metadata: Metadata = {
-  title: "Sajib | Portfolio",
+  title: "SAJIB",
   description: "Personal portfolio website - Full Stack Developer",
   icons: {
     icon: [
